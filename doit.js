@@ -25,11 +25,11 @@
 	// Change image src and open gallery viewer by clicking an image
 	for (let i = 0; i <= q; i++) {
 		gallImage[i].addEventListener('click', () => {
-			document.thepic.src = 'gallery/image'+i+'.jpg';
+			bigPic.src = 'gallery/image'+i+'.jpg';
 			pics.forEach(e => e.classList.toggle('showhide'));
 			x = i;
 		});
-	};
+	}
 
 	function slideshow() {
 		if	(x < q) {
@@ -44,7 +44,7 @@
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
 			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
 		}
-	};
+	}
 
 	function backshow() {
 		if	(x > 0) {
@@ -59,7 +59,7 @@
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
 			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
 		}
-	};
+	}
 
 	bigPic.addEventListener('click', () => {
 		slideshow();
@@ -79,16 +79,16 @@
 
 	// in case 'showhide' toggles get mixed from clicking too fast, this should reset
 	gallery.addEventListener('click', () => {
-		if (window.getComputedStyle(bigPic).display != "none" && window.getComputedStyle(picBack).display === "none") {
+		if (window.getComputedStyle(bigPic).display !== "none" && window.getComputedStyle(picBack).display === "none") {
 			pics.forEach(e => e.classList.toggle('showhide'));
 		}
 	});
 
 	document.addEventListener("keyup", e => {
-		if (window.getComputedStyle(bigPic).display != "none" && e.keyCode === 39) {
+		if (window.getComputedStyle(bigPic).display !== "none" && e.keyCode === 39) {
 			slideshow();
 		}
-		else if (window.getComputedStyle(bigPic).display != "none" && e.keyCode === 37) {
+		else if (window.getComputedStyle(bigPic).display !== "none" && e.keyCode === 37) {
 			backshow();
 		}
 		else if (e.keyCode === 27) {

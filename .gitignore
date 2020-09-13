@@ -1,2 +1,4 @@
 #Ignore psd files
 *.psd
+
+.idea/
