@@ -1,90 +1,91 @@
 ﻿document.addEventListener('DOMContentLoaded', function() {
 
 	// Open menu & move page down in portrait mode
-	document.querySelector('#menuselect').addEventListener('click', () => {
+	document.querySelector('#menuSelect').addEventListener('click', () => {
 		document.querySelectorAll('.circle').forEach(e => e.classList.toggle('spin'));
-		document.querySelector('.movedown').classList.toggle('movegal');
-		document.querySelector('nav').classList.toggle('inframe');
-		document.querySelector('nav').classList.toggle('outframe');
+		document.querySelector('.moveDown').classList.toggle('moveGal');
+		document.querySelector('nav').classList.toggle('inFrame');
+		document.querySelector('nav').classList.toggle('outFrame');
 	});
 
-	const	gallImage = document.querySelectorAll('#gallery img'),
-			q = gallImage.length - 1,
-			pics = document.querySelectorAll('.pics'),
-			gallery = document.querySelector('#gallery'),
-			picBack = document.querySelector('#picback'),
-			goLeft = document.querySelector('#goleft'),
-			goRight = document.querySelector('#goright'),
-			bigPic = document.querySelector('#bigpic');
+	const
+		gallImage = document.querySelectorAll('#gallery img'),
+		q = gallImage.length - 1,
+		pics = document.querySelectorAll('.pics'),
+		gallery = document.querySelector('#gallery'),
+		picBack = document.querySelector('#picBack'),
+		goLeft = document.querySelector('#goLeft'),
+		goRight = document.querySelector('#goRight'),
+		bigPic = document.querySelector('#bigPic');
 
 	let	x = 0;
 
 	// Randomly select header image (various fruits)
-	document.querySelector('#logo').src = '/imgs/fruit' + [~~(Math.random()*4)] + '.png';
+	document.querySelector('#logo').src = './imgs/fruit' + [~~(Math.random()*4)] + '.png';
 
 	// Change image src and open gallery viewer by clicking an image
 	for (let i = 0; i <= q; i++) {
 		gallImage[i].addEventListener('click', () => {
 			bigPic.src = 'gallery/image'+i+'.jpg';
-			pics.forEach(e => e.classList.toggle('showhide'));
+			pics.forEach(e => e.classList.toggle('showHide'));
 			x = i;
 		});
 	}
 
-	function slideshow() {
+	function slideShow() {
 		if	(x < q) {
 			x++;
-			bigPic.classList.toggle('showhide');
+			bigPic.classList.toggle('showHide');
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
+			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
 		}
 		else if	(x >= q) {
 			x = 0;
-			bigPic.classList.toggle('showhide');
+			bigPic.classList.toggle('showHide');
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
+			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
 		}
 	}
 
-	function backshow() {
+	function backShow() {
 		if	(x > 0) {
 			x--;
-			bigPic.classList.toggle('showhide');
+			bigPic.classList.toggle('showHide');
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
+			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
 		}
 		else if	(x === 0) {
 			x = q;
-			bigPic.classList.toggle('showhide');
+			bigPic.classList.toggle('showHide');
 			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showhide'); }, 500);
+			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
 		}
 	}
 
-	function exitshow() {
-		pics.forEach(e => e.classList.toggle('showhide'));
+	function openClose() {
+		pics.forEach(e => e.classList.toggle('showHide'));
 	}
 
 	bigPic.addEventListener('click', () => {
-		slideshow();
+		slideShow();
 	});
 
 	goRight.addEventListener('click', () => {
-		slideshow();
+		slideShow();
 	});
 
 	goLeft.addEventListener('click', () => {
-		backshow();
+		backShow();
 	});
 
 	picBack.addEventListener('click', () => {
-		pics.forEach(e => e.classList.toggle('showhide'));
+		pics.forEach(e => e.classList.toggle('showHide'));
 	});
 
-	// in case 'showhide' toggles get mixed from clicking too fast, this should reset
+	// in case 'showHide' toggles get mixed from clicking too fast, this should reset
 	gallery.addEventListener('click', () => {
 		if (window.getComputedStyle(bigPic).display !== "none" && window.getComputedStyle(picBack).display === "none") {
-			exitshow();
+			openClose();
 		}
 	});
 
@@ -92,13 +93,13 @@
 		if (window.getComputedStyle(bigPic).display !== "none") {
 			switch (event.key) {
 				case "Left": case "ArrowLeft":
-					backshow();
+					backShow();
 					break;
 				case "Right": case "ArrowRight":
-					slideshow();
+					slideShow();
 					break;
 				case "Esc": case "Escape":
-					exitshow();
+					openClose();
 					break;
 				default:
 					return;

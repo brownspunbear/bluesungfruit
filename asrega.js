@@ -27,9 +27,9 @@ function doGallerySize() {
 
 			thisGalleryPage.style.height = finalHeight + "px";
 			thisGalleryPage.style.marginBottom = spacing + "px";
-		};
-	};
-};
+		}
+	}
+}
 
 window.addEventListener('load', doGallerySize);
 window.addEventListener('resize', doGallerySize);
