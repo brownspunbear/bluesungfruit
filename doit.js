@@ -61,6 +61,10 @@
 		}
 	}
 
+	function exitshow() {
+		pics.forEach(e => e.classList.toggle('showhide'));
+	}
+
 	bigPic.addEventListener('click', () => {
 		slideshow();
 	});
@@ -80,20 +84,27 @@
 	// in case 'showhide' toggles get mixed from clicking too fast, this should reset
 	gallery.addEventListener('click', () => {
 		if (window.getComputedStyle(bigPic).display !== "none" && window.getComputedStyle(picBack).display === "none") {
-			pics.forEach(e => e.classList.toggle('showhide'));
+			exitshow();
 		}
 	});
 
-	document.addEventListener("keyup", e => {
-		if (window.getComputedStyle(bigPic).display !== "none" && e.keyCode === 39) {
-			slideshow();
+	document.addEventListener("keyup", event => {
+		if (window.getComputedStyle(bigPic).display !== "none") {
+			switch (event.key) {
+				case "Left": case "ArrowLeft":
+					backshow();
+					break;
+				case "Right": case "ArrowRight":
+					slideshow();
+					break;
+				case "Esc": case "Escape":
+					exitshow();
+					break;
+				default:
+					return;
+			}
+			event.preventDefault();
 		}
-		else if (window.getComputedStyle(bigPic).display !== "none" && e.keyCode === 37) {
-			backshow();
-		}
-		else if (e.keyCode === 27) {
-			pics.forEach(e => e.classList.add('showhide'));
-		}
-	});
+	}, true);
 
 });
