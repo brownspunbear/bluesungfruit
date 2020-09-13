@@ -21,7 +21,7 @@
 	let	x = 0;
 
 	// Randomly select header image (various fruits)
-	document.querySelector('#logo').src = './imgs/fruit' + [~~(Math.random()*4)] + '.png';
+	document.querySelector('#logo').src = '/imgs/fruit' + [~~(Math.random()*4)] + '.png';
 
 	// Change image src and open gallery viewer by clicking an image
 	for (let i = 0; i <= q; i++) {
