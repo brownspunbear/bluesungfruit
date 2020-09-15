@@ -1,6 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function() {
 
-	// Open menu & move page down in portrait mode
 	document.querySelector('#menuSelect').addEventListener('click', () => {
 		document.querySelectorAll('.circle').forEach(e => e.classList.toggle('spin'));
 		document.querySelector('.moveDown').classList.toggle('moveGal');
@@ -20,10 +19,8 @@
 
 	let	x = 0;
 
-	// Randomly select header image (various fruits)
 	document.querySelector('#logo').src = '/imgs/fruit' + [~~(Math.random()*4)] + '.png';
 
-	// Change image src and open gallery viewer by clicking an image
 	for (let i = 0; i <= q; i++) {
 		gallImage[i].addEventListener('click', () => {
 			bigPic.src = 'gallery/image'+i+'.jpg';
