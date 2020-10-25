@@ -36,8 +36,8 @@
 
 <link rel="stylesheet" media="screen" href="../greenseed.css" />
 
-<script src="../doit.js"></script>
-<script src="../asrega.js"></script>
+<script defer src="../doit.js"></script>
+<script defer src="../asrega.js"></script>
 
 </HEAD>
 
@@ -66,7 +66,7 @@
 
 			<a href="/">
 				<div class="menuBox">
-					<img class="menuText" src="../imgs/object1.png" alt="gallery" />
+					<img class="menuText" src="../imgs/object1.png" alt="main gallery" />
 				</div>
 			</a>
 
@@ -86,7 +86,7 @@
 
 	</section>
 
-	<section id="gallery" class="moveDown">
+	<main id="gallery" class="moveDown">
 
 		<div class="galleryPage" id="galleryPage0">
 			<img src="gallery/image0.jpg" alt="gallery image" />
@@ -117,15 +117,14 @@
 			<img src="gallery/image13.jpg" alt="gallery image" />
 		</div>
 
+	</main>
+
+	<section id="viewer" class="pics showHide">
+		<div id="picBack" class="pics"></div>
+		<img id="bigPic" class="pics" tabindex="0" src="gallery/image0.jpg" alt="gallery viewer" />
+		<button id="next" class="pics nextPrev" tabindex="0" alt="next image"></button>
+		<button id="prev" class="pics nextPrev" tabindex="0" alt="previous image"></button>
 	</section>
-
-	<div id="picBack" class="pics showHide"></div>
-
-	<div id="goLeft" class="pics leftRight showHide">&#11164;</div>
-
-	<div id="goRight" class="pics leftRight showHide">&#11166;</div>
-
-	<img id="bigPic" class="pics showHide" tabindex="0" src="gallery/image0.jpg" alt="gallery viewer" />
 
 	<div id="stopSc"></div>
 

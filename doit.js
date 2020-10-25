@@ -1,108 +1,103 @@
-﻿document.addEventListener('DOMContentLoaded', function() {
+﻿const
+	logo = document.querySelector('#logo'),
+	menuSelect = document.querySelector('#menuSelect'),
+	menuLinks = document.querySelectorAll('nav a'),
+	gallImage = document.querySelectorAll('#gallery img'),
+	q = gallImage.length - 1,
+	viewer = document.querySelector('#viewer'),
+	picBack = document.querySelector('#picBack'),
+	prevImg = document.querySelector('#prev'),
+	nextImg = document.querySelector('#next'),
+	bigPic = document.querySelector('#bigPic');
 
-	document.querySelector('#menuSelect').addEventListener('click', () => {
-		document.querySelectorAll('.circle').forEach(e => e.classList.toggle('spin'));
-		document.querySelector('.moveDown').classList.toggle('moveGal');
-		document.querySelector('nav').classList.toggle('inFrame');
-		document.querySelector('nav').classList.toggle('outFrame');
-	});
+let x = 0;
 
-	const
-		gallImage = document.querySelectorAll('#gallery img'),
-		q = gallImage.length - 1,
-		pics = document.querySelectorAll('.pics'),
-		gallery = document.querySelector('#gallery'),
-		picBack = document.querySelector('#picBack'),
-		goLeft = document.querySelector('#goLeft'),
-		goRight = document.querySelector('#goRight'),
-		bigPic = document.querySelector('#bigPic');
+logo.src = '/imgs/fruit' + [~~(Math.random() * 4)] + '.png';
 
-	let	x = 0;
-
-	document.querySelector('#logo').src = '/imgs/fruit' + [~~(Math.random()*4)] + '.png';
-
-	for (let i = 0; i <= q; i++) {
-		gallImage[i].addEventListener('click', () => {
-			bigPic.src = 'gallery/image'+i+'.jpg';
-			pics.forEach(e => e.classList.toggle('showHide'));
-			x = i;
-		});
-	}
-
-	function slideShow() {
-		if	(x < q) {
-			x++;
-			bigPic.classList.toggle('showHide');
-			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
-		}
-		else if	(x >= q) {
-			x = 0;
-			bigPic.classList.toggle('showHide');
-			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
-		}
-	}
-
-	function backShow() {
-		if	(x > 0) {
-			x--;
-			bigPic.classList.toggle('showHide');
-			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
-		}
-		else if	(x === 0) {
-			x = q;
-			bigPic.classList.toggle('showHide');
-			setTimeout( () => { bigPic.setAttribute('src','gallery/image'+x+'.jpg'); }, 400);
-			setTimeout( () => { bigPic.classList.toggle('showHide'); }, 500);
-		}
-	}
-
-	function openClose() {
-		pics.forEach(e => e.classList.toggle('showHide'));
-	}
-
-	bigPic.addEventListener('click', () => {
-		slideShow();
-	});
-
-	goRight.addEventListener('click', () => {
-		slideShow();
-	});
-
-	goLeft.addEventListener('click', () => {
-		backShow();
-	});
-
-	picBack.addEventListener('click', () => {
-		pics.forEach(e => e.classList.toggle('showHide'));
-	});
-
-	// in case 'showHide' toggles get mixed from clicking too fast, this should reset
-	gallery.addEventListener('click', () => {
-		if (window.getComputedStyle(bigPic).display !== "none" && window.getComputedStyle(picBack).display === "none") {
-			openClose();
-		}
-	});
-
-	document.addEventListener("keyup", event => {
-		if (window.getComputedStyle(bigPic).display !== "none") {
-			switch (event.key) {
-				case "Left": case "ArrowLeft":
-					backShow();
-					break;
-				case "Right": case "ArrowRight":
-					slideShow();
-					break;
-				case "Esc": case "Escape":
-					openClose();
-					break;
-				default:
-					return;
-			}
-			event.preventDefault();
-		}
-	}, true);
-
+menuSelect.addEventListener('click', () => {
+	document.querySelectorAll('.circle').forEach(e => e.classList.toggle('spin'));
+	document.querySelector('.moveDown').classList.toggle('moveGal');
+	document.querySelector('nav').classList.toggle('inFrame');
+	document.querySelector('nav').classList.toggle('outFrame');
 });
+
+menuLinks.forEach(item => {
+	item.setAttribute('tabindex', 1);
+});
+
+gallImage.forEach((item, index) => {
+	item.setAttribute('tabindex', 2);
+	item.setAttribute('alt', `gallery image ${index}`);
+	item.addEventListener('click', () => {
+		openImage(index);
+	});
+	item.addEventListener('keyup', event => {
+		viewer.classList.contains('showHide') && event.key === 'Enter' ? openImage(index) : null;
+	});
+});
+
+bigPic.addEventListener('keyup', event => {
+	event.key === 'Enter' ? nextImage() : null;
+});
+
+bigPic.addEventListener('click', () => {
+	nextImage();
+});
+
+nextImg.addEventListener('click', () => {
+	nextImage();
+});
+
+prevImg.addEventListener('click', () => {
+	prevImage();
+});
+
+picBack.addEventListener('click', () => {
+	openClose();
+});
+
+function openClose() {
+	viewer.classList.toggle('showHide');
+	setTimeout(() => { bigPic.focus(); }, 100);
+}
+
+function openImage(i) {
+	bigPic.src = 'gallery/image' + i + '.jpg';
+	openClose();
+	x = i;
+}
+
+function prevNext(j) {
+	bigPic.classList.toggle('showHide');
+	setTimeout(() => { bigPic.src = 'gallery/image' + j + '.jpg'; }, 200);
+	setTimeout(() => { bigPic.classList.toggle('showHide'); }, 300);
+}
+
+function nextImage() {
+	x < q ? x++ : x = 0;
+	prevNext(x);
+}
+
+function prevImage() {
+	x > 0 ? x-- : x = q;
+	prevNext(x);
+}
+
+document.addEventListener('keyup', event => {
+	event.preventDefault();
+	if (!viewer.classList.contains('showHide')) {
+		switch (event.key) {
+			case 'Left': case 'ArrowLeft':
+				prevImage();
+				break;
+			case 'Right': case 'ArrowRight':
+				nextImage();
+				break;
+			case 'Esc': case 'Escape':
+				openClose();
+				break;
+			default:
+				return;
+		}
+	}
+}, true);

@@ -1,36 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&family=Raleway:wght@200;400;700&display=swap');
 
-@keyframes ripple {
-	0% {
-		top: 36px;
-		left: 36px;
-		width: 0;
-		height: 0;
-		opacity: 1;
-	}
-	100% {
-		top: 0;
-		left: 0;
-		width: 72px;
-		height: 72px;
-		opacity: 0;
-	}
-}
-
-@keyframes fader {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0.2;
-	}
-}
-
 body {
+	margin: 0;
 	background: #222;
 	font-family: 'Averia Serif Libre', cursive, Arial;
 	color: #eee;
-	margin: 0;
 }
 
 a:link {
@@ -52,60 +26,21 @@ a:active {
 	text-decoration: none;
 }
 
-#rippleBox {
-	position: absolute;
-	width: 180px;
-	height: 180px;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	color: #5c85ff;
-	margin: auto;
-}
-
-#ripple {
-	display: inline-block;
-	position: relative;
-	width: 80px;
-	height: 80px;
-}
-
-#ripple div {
-	position: absolute;
-	border: 4px solid #5c85ff;
-	opacity: 1;
-	border-radius: 50%;
-	animation: ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-
-#ripple div:nth-child(2) {
-	animation-delay: -0.5s;
-}
-
-#fader {
-	animation: fader 4s infinite;
-}
-
 header {
+	margin: auto;
 	position: relative;
 	width: 100%;
 	height: 220px;
 	background: #111;
-	margin: auto;
 }
 
 #logo {
+	margin: auto;
 	position: absolute;
 	height: 180px;
 	top: 20px;
 	left: 0;
 	right: 0;
-	margin: auto;
 }
 
 #sticklyPrickly {
@@ -115,6 +50,7 @@ header {
 }
 
 nav {
+	margin: auto;
 	position: sticky;
 	width: 100%;
 	height: 60px;
@@ -125,7 +61,6 @@ nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin: auto;
 	z-index: 99;
 }
 
@@ -139,12 +74,12 @@ nav a {
 }
 
 .menuBox {
+	margin: auto;
 	width: 180px;
 	max-width: 20vw;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	margin: auto;
 }
 
 .menuBox:hover {
@@ -152,12 +87,13 @@ nav a {
 }
 
 .menuText {
+	margin: auto;
 	width: 140px;
 	max-width: 20vw;
-	margin: auto;
 }
 
 #about {
+	margin: auto;
 	position: absolute;
 	width: 40%;
 	min-width: 400px;
@@ -166,7 +102,6 @@ nav a {
 	left: 0;
 	right: 0;
 	text-align: center;
-	margin: auto;
 	z-index: 12;
 }
 
@@ -191,12 +126,12 @@ nav a {
 }
 
 #gallery {
+	margin: auto;
 	position: absolute;
 	width: 70vw;
 	top: calc(60px + 30vh);
 	left: 0;
 	right: 0;
-	margin: auto;
 	padding-bottom: 10vh;
 	z-index: 10;
 }
@@ -222,11 +157,17 @@ nav a {
 }
 
 .pics {
+	margin: auto;
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	transition: all 1s ease-in-out;
-	margin: auto;
+	transition: all 0.6s ease-in-out;
+}
+
+#viewer {
+	width: 100%;
+	height: 100%;
+	z-index: 100;
 }
 
 #bigPic {
@@ -240,33 +181,48 @@ nav a {
 	z-index: 120;
 }
 
-.leftRight {
+.nextPrev {
 	width: 10vh;
 	height: 10vh;
 	background: rgba(0, 0, 0, 0.8);
-	border-radius: 10vh;
+	border-radius: 100%;
 	border: 1px solid transparent;
-	color: #777;
-	font-size: 6vh;
-	line-height: 10vh;
+	font-family: inherit;
+	color: #0078ff;
+	font-size: 8vh;
 	text-align: center;
 	box-shadow: 0 2px 20px #111;
-	transition: all 1s ease;
 }
 
-.leftRight:hover {
+.nextPrev:hover {
 	border: 1px solid #0078ff;
 	box-shadow: 0 0 35px -15px #0078ff, 0 0 35px -20px #0078ff inset;
 }
 
-#goLeft {
+.nextPrev:active {
+	transform: scale(0.8);
+}
+
+#prev {
 	left: 2vw;
 	z-index: 122;
 }
 
-#goRight {
+#prev::before {
+	content: '‹';
+	position: relative;
+	top: -0.5vh;
+}
+
+#next {
 	right: 2vw;
 	z-index: 123;
+}
+
+#next::before {
+	content: '›';
+	position: relative;
+	top: -0.5vh;
 }
 
 #picBack {
@@ -281,12 +237,12 @@ nav a {
 }
 
 .decoration {
+	margin: auto;
 	position: relative;
 	width: 263px;
 	opacity: 0.5;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	margin: auto;
 }
 
 #menuSelect,
@@ -297,7 +253,7 @@ nav a {
 .showHide {
 	opacity: 0;
 	visibility: hidden;
-	transition: visibility 0s 0.4s, opacity 0.4s linear;
+	transition: visibility 0s 0.2s, opacity 0.2s linear;
 }
 
 .galleryPage img,
@@ -334,6 +290,7 @@ nav a {
 		z-index: 200;
 	}
 	.circle {
+		margin: auto;
 		position: fixed;
 		width: 50px;
 		top: 0;
@@ -344,7 +301,6 @@ nav a {
 		color: #5c85ff;
 		text-align: center;
 		transition: all 0.5s ease-in-out;
-		margin: auto;
 	}
 	.spin {
 		opacity: 0;
@@ -375,21 +331,21 @@ nav a {
 		opacity: 1;
 	}
 	.menuBox {
+		margin: auto;
 		width: 100%;
 		max-width: 100%;
 		height: 35px;
-		margin: auto;
 	}
 	.menuText {
+		margin: auto;
 		height: 35px;
 		max-width: 100%;
-		margin: auto;
 	}
 	#about {
+		margin: auto;
 		width: 95%;
 		min-width: auto;
 		top: 80px;
-		margin: auto;
 		transition: all 1s ease-in-out;
 	}
 	#about p {
@@ -398,10 +354,10 @@ nav a {
 		line-height: 20px;
 	}
 	#gallery {
+		margin-bottom: 10vh;
 		position: absolute;
 		width: 100%;
 		top: 80px;
-		margin-bottom: 10vh;
 		transition: all 1s ease-in-out;
 		z-index: 10;
 	}
@@ -409,18 +365,18 @@ nav a {
 		padding-top: 180px;
 	}
 	.galleryPage {
+		margin: auto;
 		width: 100%;
 		height: auto;
 		flex-direction: column;
 		justify-content: flex-start;
-		margin: auto;
 	}
 	.galleryPage img {
+		margin: auto;
 		width: 86vw;
 		height: auto;
 		padding-bottom: 2vh;
 		box-shadow: none;
-		margin: auto;
 	}
 	#stopSc {
 		display: block;
