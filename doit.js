@@ -10,7 +10,8 @@
 	nextImg = document.querySelector('#next'),
 	bigPic = document.querySelector('#bigPic');
 
-let x = 0;
+let x = 0,
+	images = [];
 
 logo.src = '/imgs/fruit' + [~~(Math.random() * 4)] + '.png';
 
@@ -26,8 +27,8 @@ menuLinks.forEach(item => {
 });
 
 gallImage.forEach((item, index) => {
+	images.push(item.src);
 	item.setAttribute('tabindex', 2);
-	item.setAttribute('alt', `gallery image ${index}`);
 	item.addEventListener('click', () => {
 		openImage(index);
 	});
@@ -62,14 +63,14 @@ function openClose() {
 }
 
 function openImage(i) {
-	bigPic.src = 'gallery/image' + i + '.jpg';
+	bigPic.src = images[i];
 	openClose();
 	x = i;
 }
 
 function prevNext(j) {
 	bigPic.classList.toggle('showHide');
-	setTimeout(() => { bigPic.src = 'gallery/image' + j + '.jpg'; }, 200);
+	setTimeout(() => { bigPic.src = images[j]; }, 200);
 	setTimeout(() => { bigPic.classList.toggle('showHide'); }, 300);
 }
 
