@@ -9,7 +9,7 @@
 	prevImg = document.querySelector('#prev'),
 	nextImg = document.querySelector('#next'),
 	bigPic = document.querySelector('#bigPic'),
-	url = window.location.contains('github') ? '/bluesungfruit' : '';
+	url = window.location.toString().includes('github') ? '/bluesungfruit' : '';
 
 let x = 0,
 	images = [];
