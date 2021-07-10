@@ -8,12 +8,13 @@
 	picBack = document.querySelector('#picBack'),
 	prevImg = document.querySelector('#prev'),
 	nextImg = document.querySelector('#next'),
-	bigPic = document.querySelector('#bigPic');
+	bigPic = document.querySelector('#bigPic'),
+	url = window.location.contains('github') ? '/bluesungfruit' : '';
 
 let x = 0,
 	images = [];
 
-logo.src = '/imgs/fruit' + [~~(Math.random() * 4)] + '.png';
+logo.src = url + '/imgs/fruit' + [~~(Math.random() * 4)] + '.png';
 
 menuSelect.addEventListener('click', () => {
 	document.querySelectorAll('.circle').forEach(e => e.classList.toggle('spin'));
